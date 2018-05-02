@@ -1,0 +1,27 @@
+name: sbstjn.com
+info: Personal website
+cookies:
+  - name: __cfduid
+    info: Some cookie. IDK what purpose.
+    host: .sbstjn.com
+    expires: 1d
+
+  - name: _gauges_unique
+    info: Some cookie. IDK what purpose.
+    expires: 10y
+
+  - name: _gauges_unique_day
+    info: Some cookie. IDK what purpose.
+    expires: 1d
+
+  - name: _gauges_unique_hour
+    info: Some cookie. IDK what purpose.
+    expires: 1h
+
+  - name: _gauges_unique_month
+    info: Some cookie. IDK what purpose.
+    expires: 1m
+
+  - name: _gauges_unique_year
+    info: Some cookie. IDK what purpose.
+    expires: 1y

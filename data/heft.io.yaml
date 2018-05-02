@@ -1,0 +1,7 @@
+name: heft.io
+info: Website Analytics
+cookies:
+  - name: __cfduid
+    info: Some cookie. IDK what purpose.
+    host: .heft.io
+    expires: 1d

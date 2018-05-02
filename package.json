@@ -1,0 +1,29 @@
+{
+  "name": "definitions",
+  "version": "1.0.0",
+  "description": "Definitions for Cookies.WTF",
+  "main": "README.md",
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build": "./scripts/build.js",
+    "postbuild": "cp netlify/* dist/",
+    "predeploy": "dot-json dist/main.json version \"0.0.1\"",
+    "deploy": "netlify deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckies/definitions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ckies/definitions/issues"
+  },
+  "homepage": "https://github.com/ckies/definitions#readme",
+  "devDependencies": {
+    "dot-json": "^1.0.4",
+    "js-yaml": "^3.11.0",
+    "mkdirp": "^0.5.1"
+  }
+}
