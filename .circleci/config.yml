@@ -152,7 +152,7 @@ workflows:
 
   release:
     jobs:
-      - checkout
+      - checkout:
           <<: *releases
       - lint:
           <<: *releases
