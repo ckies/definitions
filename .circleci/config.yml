@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: nikolaik/python-nodejs:latest
+    - image: sbstjn/node-yamale
 
 version: 2
 
@@ -18,13 +18,8 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: Install yamale
-          command: pip install yamale
-
-      - run:
           name: Install Dependencies
           command: yarn install
-
 
       - save_cache:
           paths:
@@ -48,7 +43,7 @@ jobs:
           name: Lint code
           command: yarn lint
 
-  test:
+  validate:
     <<: *defaults
 
     steps:
@@ -65,9 +60,9 @@ workflows:
   build:
     jobs:
       - checkout
-      - test:
+      - lint:
           requires:
             - checkout
-      - lint:
+      - validate:
           requires:
             - checkout
