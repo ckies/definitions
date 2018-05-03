@@ -1,6 +1,6 @@
 {
-  "name": "definitions",
-  "version": "0.0.2",
+  "name": "@ckies/definitions",
+  "version": "0.0.1",
   "description": "Definitions for Cookies.WTF",
   "main": "README.md",
   "scripts": {
