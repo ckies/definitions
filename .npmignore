@@ -2,6 +2,7 @@
 !dist
 
 .circleci
+.netlify
 data
 netlify
 scripts
