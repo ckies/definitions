@@ -5,6 +5,7 @@
   "main": "README.md",
   "scripts": {
     "prebuild": "rm -rf ./dist",
+    "lint": "yamllint data/**/*.yaml",
     "build": "./scripts/build.js",
     "build:copy": "cp netlify/* dist/",
     "build:version": "dot-json dist/main.json version \"`dot-json package.json version`\"",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "dot-json": "^1.0.4",
     "js-yaml": "^3.11.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "yaml-lint": "^1.2.3"
   }
 }
