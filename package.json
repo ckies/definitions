@@ -1,6 +1,5 @@
 {
   "name": "@ckies/definitions",
-  "version": "0.0.7",
   "description": "Definitions for Cookies.WTF",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
