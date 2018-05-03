@@ -1,14 +1,14 @@
 {
   "name": "definitions",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Definitions for Cookies.WTF",
   "main": "README.md",
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "./scripts/build.js",
-    "postbuild": "cp netlify/* dist/",
-    "predeploy": "dot-json dist/main.json version \"0.0.1\"",
-    "deploy": "netlify deploy"
+    "build:copy": "cp netlify/* dist/",
+    "build:version": "dot-json dist/main.json version \"`dot-json package.json version`\"",
+    "postbuild": "npm run build:copy; npm run build:version"
   },
   "repository": {
     "type": "git",
