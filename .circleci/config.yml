@@ -1,0 +1,72 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:latest
+
+version: 2
+
+jobs:
+  checkout:
+    <<: *defaults
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run:
+          name: Install Dependencies
+          command: yarn install
+
+      - run:
+          name: Install yamale
+          command: pip install yamale
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - '*'
+            - '*.*'
+
+  lint:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Lint code
+          command: yarn lint
+
+  test:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Run validation
+          command: yarn validate
+
+workflows:
+  version: 2
+
+  build:
+    jobs:
+      - checkout
+      - test:
+          requires:
+            - checkout
+      - lint:
+          requires:
+            - checkout

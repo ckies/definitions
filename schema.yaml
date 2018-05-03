@@ -1,0 +1,10 @@
+name: str()
+info: str()
+cookies: list(include('cookie'))
+---
+cookie:
+  name: str()
+  info: str()
+  host: str(required=False)
+  type: enum('necessary', 'functional', 'performance', 'marketing')
+  expires: str()

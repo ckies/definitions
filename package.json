@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "lint": "yamllint data/**/*.yaml",
+    "validate": "yamale -s schema.yaml data/",
     "build": "./scripts/build.js",
     "build:copy": "cp netlify/* dist/",
     "build:version": "dot-json dist/main.json version \"`dot-json package.json version`\"",
@@ -16,8 +17,8 @@
     "url": "git+https://github.com/ckies/definitions.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sebastian Müller <code@sbstjn.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ckies/definitions/issues"
   },
