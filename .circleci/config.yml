@@ -18,12 +18,15 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: Install yamale
+          command: |
+            apt-get -y -qq install pip
+            pip install yamale
+
+      - run:
           name: Install Dependencies
           command: yarn install
 
-      - run:
-          name: Install yamale
-          command: pip install yamale
 
       - save_cache:
           paths:
