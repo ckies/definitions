@@ -4,4 +4,5 @@ cookies:
   - name: __cfduid
     info: Some cookie. IDK what purpose.
     host: .heft.io
+    type: necessary
     expires: 1d
