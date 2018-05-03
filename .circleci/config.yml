@@ -3,6 +3,13 @@ defaults: &defaults
   docker:
     - image: sbstjn/node-yamale
 
+releases: &releases
+  filters:
+    tags:
+      only: /v[0-9]+(\.[0-9]+)*/
+    branches:
+      ignore: /.*/
+
 version: 2
 
 jobs:
@@ -16,10 +23,6 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
-
-      - run: 
-          name: Write NPM Token to ~/.npmrc
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
       - run:
           name: Install Dependencies
@@ -86,6 +89,47 @@ jobs:
           name: Run tests
           command: yarn test
 
+  publish:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run: 
+          name: Write NPM Token to ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+
+      - run:
+          name: Write version to package.json
+          command: $(npm bin)/dot-json package.json version ${CIRCLE_TAG:1}
+
+      - run:
+          name: Publish to NPM
+          command: npm publish
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - package.json
+
+  deploy:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run: 
+          name: Write Netlify Token to ~/.netlify
+          command: |
+            mkdir ~/.netlify
+            echo "{\"access_token\":\"$NETLIFY_TOKEN\"}" >> ~/.netlify/config
+
+      - run:
+          name: Publish to Netlify
+          command: npm run deploy
+
 workflows:
   version: 2
 
@@ -105,3 +149,33 @@ workflows:
       - test:
           requires:
             - build
+
+  release:
+    jobs:
+      - checkout
+          <<: *releases
+      - lint:
+          <<: *releases
+          requires:
+            - checkout
+      - validate:
+          <<: *releases
+          requires:
+            - checkout
+      - build:
+          <<: *releases
+          requires:
+            - lint
+            - validate
+      - test:
+          <<: *releases
+          requires:
+            - build
+      - publish:
+          <<: *releases
+          requires:
+            - test
+      - deploy:
+          <<: *releases
+          requires:
+            - publish

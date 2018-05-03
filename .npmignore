@@ -6,7 +6,6 @@ data
 netlify
 scripts
 src
-netlify.toml
 schema.yaml
 tsconfig.json
 tslint.json
