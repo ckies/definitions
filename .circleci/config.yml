@@ -17,6 +17,10 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
+      - run: 
+          name: Write NPM Token to ~/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+
       - run:
           name: Install Dependencies
           command: yarn install
@@ -54,6 +58,34 @@ jobs:
           name: Run validation
           command: yarn validate
 
+  build:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Build
+          command: yarn build
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - dist
+            - lib
+
+  test:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Run tests
+          command: yarn test
+
 workflows:
   version: 2
 
@@ -66,3 +98,10 @@ workflows:
       - validate:
           requires:
             - checkout
+      - build:
+          requires:
+            - lint
+            - validate
+      - test:
+          requires:
+            - build
