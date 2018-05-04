@@ -1,9 +1,6 @@
-export enum CookieType {
-  NECESSARY = 'necessary',
-  FUNCTIONAL = 'functioncal',
-  PERFORMANCE = 'performance',
-  MARKETING = 'marketing'
-}
+import { CookieType } from '@ckies/library'
+
+export { CookieType }
 
 export interface Cookie {
   name: string
