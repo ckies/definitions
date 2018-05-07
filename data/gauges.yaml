@@ -1,12 +1,7 @@
-name: sbstjn.com
-info: Personal website
+name: Gauges
+info: Website Analytics
+website: https://get.gaug.es/
 cookies:
-  - name: __cfduid
-    info: Some cookie. IDK what purpose.
-    host: .sbstjn.com
-    type: necessary
-    expires: 1d
-
   - name: _gauges_unique
     info: Some cookie. IDK what purpose.
     type: performance

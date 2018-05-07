@@ -1,25 +1,14 @@
 {
   "name": "@ckies/definitions",
   "description": "Definitions for Cookies.WTF",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "prebuild": "rm -rf ./lib; rm -rf ./dist",
-    "build": "npm run build:json; npm run build:compile",
-    "lint": "npm run lint:ts; npm run lint:yaml",
+    "prebuild": "rm -rf ./dist",
     "lint:ts": "tslint src/*.ts",
-    "lint:yaml": "yamllint data/**/*.yaml",
+    "lint:yaml": "yamale -s schema.yaml data/",
     "test": "jest",
-    "validate": "yamale -s schema.yaml dist/",
-    "build:json": "./scripts/build.js",
-    "build:compile": "tsc",
-    "netlify": "npm run netlify:copy; npm run netlify:version",
-    "netlify:copy": "cp netlify/* dist/",
-    "netlify:version": "dot-json dist/main.json version \"`dot-json package.json version`\"",
-    "predeploy": "npm run netlify",
-    "deploy": "netlify deploy",
-    "prenetlify": "npm run build:json",
-    "prepublish": "npm run build:json; npm run build:compile"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -51,7 +40,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",

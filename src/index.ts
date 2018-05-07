@@ -1,2 +1,1 @@
-export { Definitions } from './definitions'
-export { Host, Cookie, CookieType } from './types'
+export { Service } from './Service'

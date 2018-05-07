@@ -6,7 +6,7 @@
     "allowJs": false,
     "moduleResolution": "node",
     "rootDir": "./src",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,

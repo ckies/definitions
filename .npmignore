@@ -1,12 +1,9 @@
-!lib
 !dist
 
-.circleci
-.netlify
-data
-netlify
-scripts
 src
+tests
+
+.circleci
 schema.yaml
 tsconfig.json
 tslint.json

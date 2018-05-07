@@ -1,0 +1,8 @@
+name: Example Working
+info: A Working Example Configuration
+website: https://www.example.com/
+cookies:
+  - name: __name
+    info: Some cookie. IDK what purpose.
+    type: necessary
+    expires: 1d
